@@ -7,7 +7,6 @@ var rate = require('../models/Rate.js');
 
 /* GET SINGLE Bd BY ID */
 router.get('/:rateid', function(req, res, next) {
-	console.log(req.params.rateid);
   Bd.find({'rateid':req.params.rateid}, function (err, post) {
     if (err) return next(err);
     res.json(post);

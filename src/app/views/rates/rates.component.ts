@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class RatesComponent implements OnInit {
 
 
-//	public rateCreateModal;
 	public ratesBd =  {
     			number: 0,
     			hours: 0,
@@ -21,11 +20,13 @@ export class RatesComponent implements OnInit {
     			total: 0,
     			rateid: 0
     		};
+    		
     public ratesLib =  {
     			description: '',
     			unit: 0,
     			unitcost: 0
     		};
+    		
 	rates: any;
 	bd: any;
 	
@@ -64,8 +65,10 @@ export class RatesComponent implements OnInit {
     saveRate() {
 	    this.http.post(defaultConfig.apiurl + 'rate', this.ratesLib)
 	      .subscribe(res => {
+	      	  this.clearForm();
 	      	  this.loadRates();
 	      	  this.rateCreateModal.hide();
+	      	  
 	        }, (err) => {
 	          console.log(err);
 	        }
@@ -75,8 +78,10 @@ export class RatesComponent implements OnInit {
   	saveBd() {
 	    this.http.post(defaultConfig.apiurl + 'bd/'+this.ratesBd.rateid, this.ratesBd)
 	      .subscribe(res => {
+	      
 	      	  this.loadRates();
 	          this.setBdModal.hide();
+	          
 	        }, (err) => {
 	          console.log(err);
 	        }
@@ -90,17 +95,22 @@ export class RatesComponent implements OnInit {
 	
 	
 	loadRates(){
-	
 		this.http.get(defaultConfig.apiurl + 'rate').subscribe(data => {
    			this.rates = data;
-   		
     	});
-	
 	}
 	
 	calculateBdTotal(){
 	    this.ratesBd.total = this.ratesBd.number * this.ratesBd.days * this.ratesBd.hours * this.ratesBd.hourlyrate ;
 		return this.ratesBd.total;
+	}
+	
+	clearForm(){
+		this.ratesLib =  {
+	    			description: '',
+	    			unit: 0,
+	    			unitcost: 0
+	    		};
 	}
 
 }
