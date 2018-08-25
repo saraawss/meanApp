@@ -1,12 +1,12 @@
 # MEAN Stack (Angular 6) Demo App
 
-##Prerequisites:
+## Prerequisites:
 
 * Node 8.x.x 
 * Git
 * Mongodb server ( Community edition)
 
-##To run
+## To run
 
 * Clone this repo in your local
 * Update the Node.js to version 8
