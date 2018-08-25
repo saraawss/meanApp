@@ -1,0 +1,146 @@
+<div class="animated fadeIn">
+  <div class="row">
+     <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h1>Rate Library
+			  <button type="button" data-toggle="modal"  (click)="rateCreateModal.show()" class="btn btn-primary">+</button>
+		  </h1>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Unit</th>
+                <th>Unit Cost (Ex)</th>
+                <th>BD</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rate of rates">
+		        <td>{{ rate.description }}</td>
+		        <td>{{ rate.unit }}</td>
+		        <td>{{ rate.unitcost }}</td>
+		        <td *ngIf="!rate.Bd"><a href="#" (click)="setRateBdd(rate)">Add BD</a></td>
+		        <td *ngIf="rate.Bd"><a href="#" (click)="setRateBdd(rate)">View BD</a></td>
+      		  </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+
+</div>
+
+<div bsModal #rateCreateModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-primary modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Rate Libary</h4>
+        <button type="button" class="close" (click)="rateCreateModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="col-lg-12">
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="row">
+            
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="cvv">Description</label>
+                <input type="text" class="form-control" id="description" [(ngModel)]="ratesLib.description">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="cvv">Unit</label>
+                <input type="number" class="form-control" id="unit" [(ngModel)]="ratesLib.unit">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label for="cvv">Unit Cost</label>
+                <input type="number" class="form-control" id="unitcost" [(ngModel)]="ratesLib.unitcost">
+              </div>
+            </div>
+          </div><!--/.row-->
+        </div>
+      </div>
+    </div><!--/.col-->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="rateCreateModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveRate()">Save</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div bsModal #setBdModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-success modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Save BD</h4>
+        <button type="button" class="close" (click)="setBdModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="col-lg-12">
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="row">
+            
+          <div class="col-sm-2">
+              <div class="form-group">
+                <label for="number">Number</label>
+                <input type="number" class="form-control" id="number" [(ngModel)]="ratesBd.number">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label for="hours">Hours</label>
+                <input type="number" class="form-control" id="hours" [(ngModel)]="ratesBd.hours">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label for="days">Days</label>
+                <input type="number" class="form-control" id="days" [(ngModel)]="ratesBd.days">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label for="hourlyrate">Hourly Rate</label>
+                <input type="number" class="form-control" id="hourlyrate" [(ngModel)]="ratesBd.hourlyrate">
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label for="total">Total</label>
+                <input type="text" class="form-control" id="total" [value]="calculateBdTotal()" readonly="readonly">
+              </div>
+            </div>
+          
+          </div><!--/.row-->
+        </div>
+      </div>
+    </div><!--/.col-->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="setBdModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveBd()">Save</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
